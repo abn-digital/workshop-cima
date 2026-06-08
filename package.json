@@ -1,0 +1,6 @@
+{
+  "name": "workshop-cima",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

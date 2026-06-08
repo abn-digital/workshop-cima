@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Feedback · Workshop CIMA × Hike</title>
+    <meta name="description"
+        content="Resultados del feedback del Workshop de IA para CIMA: satisfacción, utilidad y comentarios de los participantes.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-light: #38bdf8;
+            --secondary: #6366f1;
+            --accent: #06b6d4;
+            --border: rgba(100, 116, 139, .14);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            background: #f8fafc;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        h1,
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            letter-spacing: -.02em
+        }
+
+        h3,
+        h4 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -.01em
+        }
+
+        .bg-main {
+            background: radial-gradient(circle at 85% 5%, rgba(14, 165, 233, .06), transparent 40%), radial-gradient(circle at 5% 85%, rgba(99, 102, 241, .055), transparent 40%), #f8fafc
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04), 0 4px 16px rgba(0, 0, 0, .04)
+        }
+
+        .card-elevated {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .07)
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .tag-sky {
+            background: rgba(14, 165, 233, .16);
+            color: #0369a1;
+            border: 1px solid rgba(14, 165, 233, 0.35)
+        }
+
+        .tag-indigo {
+            background: rgba(99, 102, 241, .16);
+            color: #4338ca;
+            border: 1px solid rgba(99, 102, 241, 0.35)
+        }
+
+        .tag-emerald {
+            background: rgba(16, 185, 129, .09);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, .16)
+        }
+
+        .tag-amber {
+            background: rgba(245, 158, 11, .16);
+            color: #92400e;
+            border: 1px solid rgba(245, 158, 11, 0.35)
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            border: none;
+            transition: all .3s;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, .25);
+            display: inline-block
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(14, 165, 233, .38)
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(14, 165, 233, .07), transparent 65%);
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .partner-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-logos img,
+        .partner-logos svg {
+            height: 40px;
+            object-fit: contain;
+            opacity: .7;
+        }
+
+        .partner-logos .logo-divider {
+            width: 1px;
+            height: 28px;
+            background: rgba(100, 116, 139, .2);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0f172a, #0c1a3a);
+            color: #fff
+        }
+
+        /* Score Ring */
+        .score-ring-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+        }
+
+        .score-ring {
+            width: 160px;
+            height: 160px;
+            transform: rotate(-90deg);
+        }
+
+        .score-ring-bg {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 10;
+        }
+
+        .score-ring-fill {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .score-ring-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .score-ring-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .score-ring-max {
+            font-size: .85rem;
+            font-weight: 300;
+            color: #94a3b8;
+        }
+
+        /* Animated count */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp .7s cubic-bezier(.4, 0, .2, 1) both;
+        }
+
+        .stagger-1 {
+            animation-delay: .1s
+        }
+
+        .stagger-2 {
+            animation-delay: .2s
+        }
+
+        .stagger-3 {
+            animation-delay: .3s
+        }
+
+        .stagger-4 {
+            animation-delay: .4s
+        }
+
+        .stagger-5 {
+            animation-delay: .5s
+        }
+
+        /* Percent bar */
+        .percent-bar-track {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .percent-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+
+        /* NPS-style bar chart */
+        .nps-bar {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 180px;
+            padding-top: 20px;
+            position: relative;
+        }
+
+        .nps-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nps-bar-fill {
+            width: 100%;
+            max-width: 52px;
+            border-radius: 8px 8px 4px 4px;
+            height: 0;
+        }
+
+        .nps-bar-label {
+            font-size: .75rem;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .nps-bar-count {
+            font-size: .8rem;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        /* Comment card */
+        .comment-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            transition: all .3s;
+            position: relative;
+        }
+
+        .comment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+            border-color: rgba(14, 165, 233, .2);
+        }
+
+        .comment-card::before {
+            content: '"';
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+            opacity: .06;
+            font-family: Georgia, serif;
+        }
+
+        /* Highlight stat */
+        .highlight-stat {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .05);
+            transition: all .3s;
+        }
+
+        .highlight-stat:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .10);
+            border-color: rgba(14, 165, 233, .22);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .float-anim {
+            animation: float 5s ease-in-out infinite
+        }
+
+        /* Scroll reveal */
+        .scroll-reveal {
+            transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .scroll-reveal.will-animate {
+            opacity: 0;
+            transform: translateY(24px)
+        }
+
+        .scroll-reveal.active {
+            opacity: 1 !important;
+            transform: translateY(0) !important
+        }
+
+        /* Placeholder pulse */
+        @keyframes pulse-placeholder {
+            0%, 100% { opacity: .5 }
+            50% { opacity: .2 }
+        }
+
+        .placeholder-pulse {
+            animation: pulse-placeholder 2s ease-in-out infinite;
+        }
+
+        /* Pending banner */
+        .pending-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, .06), rgba(99, 102, 241, .06));
+            border: 1.5px dashed rgba(245, 158, 11, .3);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="bg-main font-light">
+
+    <div class="hero-glow"></div>
+
+    <!-- ── Back nav ── -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-sky-600 transition-colors" style="text-decoration:none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Volver al Workshop
+            </a>
+            <span class="tag tag-amber">Pendiente</span>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+     HERO
+    ══════════════════════════════════════ -->
+    <header class="relative pt-32 pb-16 px-6 max-w-6xl mx-auto text-center z-10">
+        <div class="animate-in">
+            <div class="partner-logos">
+                <img src="hikelogo-violet.png" alt="Hike Ecosystem">
+                <div class="logo-divider"></div>
+                <!-- CIMA Logo -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="171" height="41" viewBox="0 0 171 41" fill="none" style="height:48px;width:auto">
+                    <g clip-path="url(#clip0_fb)">
+                        <path d="M57.2227 24.0283V16.72C57.2227 7.1185 63.0788 0.769287 71.288 0.769287C77.8742 0.769287 83.3154 4.34306 83.8879 12.1336H79.5496C78.9194 6.8506 76.309 4.34842 71.3405 4.34842C65.3793 4.34842 61.7185 9.04201 61.7185 16.7254V23.9801C61.7185 31.717 65.0641 36.3034 71.3405 36.3034C76.1515 36.3034 79.6021 33.5816 80.1221 27.8217H84.203C83.473 36.2498 78.2943 39.9308 71.288 39.9308C62.5011 39.9308 57.2227 33.7959 57.2227 24.0336V24.0283Z" fill="#1e293b"/>
+                        <path d="M92.1436 0.769287H96.6026V39.9522H92.1436V0.769287Z" fill="#1e293b"/>
+                        <path d="M106.162 0.769287H112.176L121.682 29.9221L130.926 0.769287H137.05V39.9522H132.591V7.72931L122.118 39.9522H120.831L110.574 7.6275V39.8504L106.167 39.9522V0.769287H106.162Z" fill="#1e293b"/>
+                        <path d="M160.684 0.769287H154.403L143.925 39.9522H148.447L151.32 29.3488L152.292 25.7268L157.675 6.7863L162.833 25.7053L163.799 29.3166L166.541 39.9522H171L160.684 0.769287Z" fill="#1e293b"/>
+                        <path d="M34.3123 18.5149L27.5265 25.4374C27.5265 25.4374 27.5265 25.4374 27.5107 25.4535L27.579 25.5231L27.5212 25.5981L33.5402 31.7384L40.4048 24.7355L34.307 18.5149H34.3123Z" fill="#75A0AA"/>
+                        <path d="M27.5896 25.5178L21.5076 19.3132L7.0957 34.0102L13.1882 40.2308L27.5214 25.6089" fill="#9CC0CA"/>
+                        <path d="M27.2225 0.919312L20.4367 7.84182C20.4367 7.84182 20.4367 7.84182 20.4209 7.8579L20.4892 7.92755L20.4314 8.00256L26.4504 14.1428L33.315 7.13993L27.2225 0.919312Z" fill="#75A0AA"/>
+                        <path d="M20.494 7.92755L14.4119 1.71765L0 16.42L6.09776 22.6352L20.4257 8.01328" fill="#9CC0CA"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_fb">
+                            <rect width="171" height="39.4615" fill="white" transform="translate(0 0.769287)"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <span class="tag tag-emerald mb-6 inline-block">— Respuestas · Feedback Post-Workshop</span>
+            <h1 class="text-4xl md:text-6xl font-light mb-4 leading-[1.1] tracking-tight text-slate-900">
+                Resultados del <span class="gradient-text">Feedback</span>
+            </h1>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
+                Así valoraron los participantes el <strong class="font-medium text-slate-700">Workshop de Inteligencia Artificial</strong> realizado para CIMA.
+            </p>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════
+     PENDING BANNER
+    ══════════════════════════════════════ -->
+    <section class="pb-12 px-6 max-w-4xl mx-auto">
+        <div class="pending-banner animate-in stagger-1">
+            <div class="flex items-center justify-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(99,102,241,.15))">
+                    <i data-lucide="clock" class="w-5 h-5 text-amber-600"></i>
+                </div>
+            </div>
+            <h3 class="text-lg font-medium text-slate-800 mb-2">Resultados pendientes</h3>
+            <p class="text-sm text-slate-500 font-light max-w-md mx-auto">Los resultados del feedback se actualizarán automáticamente una vez que los participantes completen el formulario al finalizar el workshop.</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SCORE RINGS — Satisfacción y Utilidad (Placeholders)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8 animate-in stagger-2">
+            <!-- Satisfacción -->
+            <div class="card-elevated p-8 text-center">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Satisfacción General</p>
+                <div class="score-ring-container mb-4">
+                    <svg class="score-ring" viewBox="0 0 180 180">
+                        <circle class="score-ring-bg" cx="90" cy="90" r="70" />
+                        <circle class="score-ring-fill placeholder-pulse" cx="90" cy="90" r="70"
+                            stroke="#e2e8f0" stroke-dasharray="439.82" stroke-dashoffset="439.82" />
+                        <defs>
+                            <linearGradient id="grad-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0ea5e9" />
+                                <stop offset="100%" stop-color="#6366f1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="score-ring-label">
+                        <div class="score-ring-value text-slate-300 placeholder-pulse">—</div>
+                        <div class="score-ring-max">/ 10</div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 font-light">Pendiente de respuestas</p>
+            </div>
+
+            <!-- Utilidad -->
+            <div class="card-elevated p-8 text-center">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Utilidad del Workshop</p>
+                <div class="score-ring-container mb-4">
+                    <svg class="score-ring" viewBox="0 0 180 180">
+                        <circle class="score-ring-bg" cx="90" cy="90" r="70" />
+                        <circle class="score-ring-fill placeholder-pulse" cx="90" cy="90" r="70"
+                            stroke="#e2e8f0" stroke-dasharray="439.82" stroke-dashoffset="439.82" />
+                    </svg>
+                    <div class="score-ring-label">
+                        <div class="score-ring-value text-slate-300 placeholder-pulse">—</div>
+                        <div class="score-ring-max">/ 10</div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 font-light">Pendiente de respuestas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     KEY STATS — Porcentajes clave (Placeholders)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 animate-in stagger-3">
+            <div class="highlight-stat">
+                <div class="text-3xl font-light text-slate-300 mb-1 placeholder-pulse">—</div>
+                <div class="text-xs font-medium text-slate-600">Respuestas</div>
+                <div class="text-[10px] text-slate-400 mt-1">Participantes</div>
+            </div>
+            <div class="highlight-stat">
+                <div class="text-3xl font-light text-slate-300 mb-1 placeholder-pulse">—%</div>
+                <div class="text-xs font-medium text-slate-600">Usarían IA</div>
+                <div class="text-[10px] text-slate-400 mt-1">en su día a día</div>
+            </div>
+            <div class="highlight-stat">
+                <div class="text-3xl font-light text-slate-300 mb-1 placeholder-pulse">—%</div>
+                <div class="text-xs font-medium text-slate-600">Participarían de nuevo</div>
+                <div class="text-[10px] text-slate-400 mt-1">en un taller similar</div>
+            </div>
+            <div class="highlight-stat">
+                <div class="text-3xl font-light text-slate-300 mb-1 placeholder-pulse">—%</div>
+                <div class="text-xs font-medium text-slate-600">Recomiendan repetir</div>
+                <div class="text-[10px] text-slate-400 mt-1">con otro grupo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     BAR CHARTS — Distribución (Placeholders)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8 animate-in stagger-4">
+            <!-- Satisfacción distribution -->
+            <div class="card-elevated p-8">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Distribución</p>
+                <h3 class="text-lg font-medium text-slate-800 mb-6">Satisfacción por puntuación</h3>
+                <div class="nps-bar">
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:20px"></div>
+                        <div class="nps-bar-label">1</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:30px"></div>
+                        <div class="nps-bar-label">2</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:40px"></div>
+                        <div class="nps-bar-label">3</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:60px"></div>
+                        <div class="nps-bar-label">4</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:90px"></div>
+                        <div class="nps-bar-label">5</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utilidad distribution -->
+            <div class="card-elevated p-8">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Distribución</p>
+                <h3 class="text-lg font-medium text-slate-800 mb-6">Utilidad por puntuación</h3>
+                <div class="nps-bar">
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:20px"></div>
+                        <div class="nps-bar-label">1</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:30px"></div>
+                        <div class="nps-bar-label">2</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:40px"></div>
+                        <div class="nps-bar-label">3</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:60px"></div>
+                        <div class="nps-bar-label">4</div>
+                    </div>
+                    <div class="nps-col">
+                        <div class="nps-bar-count text-slate-300">—</div>
+                        <div class="nps-bar-fill placeholder-pulse" style="background:#e2e8f0;height:90px"></div>
+                        <div class="nps-bar-label">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     YES/NO BREAKDOWN (Placeholder)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="card-elevated p-8 animate-in stagger-5">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Intención de Adopción</p>
+            <h3 class="text-lg font-medium text-slate-800 mb-8">¿Aplicarías estas herramientas en tu día a día?</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="text-4xl font-light mb-2 text-slate-300 placeholder-pulse">—</div>
+                    <div class="percent-bar-track mb-2">
+                        <div class="percent-bar-fill" style="width:0;background:linear-gradient(90deg,#10b981,#06b6d4)"></div>
+                    </div>
+                    <div class="text-sm font-medium text-slate-700">Sí</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-light mb-2 text-slate-300 placeholder-pulse">—</div>
+                    <div class="percent-bar-track mb-2">
+                        <div class="percent-bar-fill" style="width:0;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div>
+                    </div>
+                    <div class="text-sm font-medium text-slate-700">Quizás</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-light mb-2 text-slate-300 placeholder-pulse">—</div>
+                    <div class="percent-bar-track mb-2">
+                        <div class="percent-bar-fill" style="width:0;background:linear-gradient(90deg,#fca5a5,#ef4444)"></div>
+                    </div>
+                    <div class="text-sm font-medium text-slate-700">No</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     COMMENTS — Lo más útil (Placeholder)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-10 animate-in stagger-5">
+            <span class="tag tag-indigo mb-4 inline-block">Respuestas Abiertas</span>
+            <h2 class="text-3xl md:text-4xl font-medium mb-3 text-slate-900">Lo más útil del Workshop</h2>
+            <p class="text-slate-500 max-w-xl mx-auto font-light text-sm">¿Cuál fue el aspecto más útil según los participantes?</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 animate-in stagger-5">
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+            <div class="comment-card" style="border:1.5px dashed rgba(100,116,139,.15)">
+                <p class="text-sm text-slate-300 font-light leading-relaxed italic placeholder-pulse">Los comentarios aparecerán aquí después del workshop...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SUGGESTIONS — Temas para futuros talleres (Placeholder)
+    ══════════════════════════════════════ -->
+    <section class="pb-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-10 animate-in stagger-5">
+            <span class="tag tag-amber mb-4 inline-block">Sugerencias</span>
+            <h2 class="text-3xl md:text-4xl font-medium mb-3 text-slate-900">Temas para futuros talleres</h2>
+            <p class="text-slate-500 max-w-xl mx-auto font-light text-sm">Lo que los participantes quisieran explorar próximamente.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 animate-in stagger-5">
+            <div class="card p-5" style="border-left:3px solid #e2e8f0;border:1.5px dashed rgba(100,116,139,.15)">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(100,116,139,.06)">
+                        <i data-lucide="lightbulb" class="w-4 h-4 text-slate-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-300 mb-1 placeholder-pulse">Sugerencia pendiente...</p>
+                        <p class="text-xs text-slate-200 font-light placeholder-pulse">Aparecerá después del workshop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-5" style="border-left:3px solid #e2e8f0;border:1.5px dashed rgba(100,116,139,.15)">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(100,116,139,.06)">
+                        <i data-lucide="lightbulb" class="w-4 h-4 text-slate-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-300 mb-1 placeholder-pulse">Sugerencia pendiente...</p>
+                        <p class="text-xs text-slate-200 font-light placeholder-pulse">Aparecerá después del workshop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-5" style="border-left:3px solid #e2e8f0;border:1.5px dashed rgba(100,116,139,.15)">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(100,116,139,.06)">
+                        <i data-lucide="lightbulb" class="w-4 h-4 text-slate-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-300 mb-1 placeholder-pulse">Sugerencia pendiente...</p>
+                        <p class="text-xs text-slate-200 font-light placeholder-pulse">Aparecerá después del workshop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-5" style="border-left:3px solid #e2e8f0;border:1.5px dashed rgba(100,116,139,.15)">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(100,116,139,.06)">
+                        <i data-lucide="lightbulb" class="w-4 h-4 text-slate-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-300 mb-1 placeholder-pulse">Sugerencia pendiente...</p>
+                        <p class="text-xs text-slate-200 font-light placeholder-pulse">Aparecerá después del workshop.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     FOOTER
+    ══════════════════════════════════════ -->
+    <footer class="py-12 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <img src="hikelogo-violet.png" alt="Hike Ecosystem" style="height:24px;opacity:.6;filter:brightness(2)">
+                <div style="width:1px;height:16px;background:rgba(255,255,255,.2)"></div>
+                <span class="text-slate-400 text-sm font-light">CIMA × Hike</span>
+            </div>
+            <p class="text-slate-500 text-xs font-light">Workshop de Inteligencia Artificial · 10 de Junio 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            el.classList.add('will-animate');
+            observer.observe(el);
+        });
+
+        // Lucide icons
+        if (window.lucide) lucide.createIcons();
+    </script>
+</body>
+
+</html>

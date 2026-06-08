@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligencia Artificial — Del concepto a la acción · Workshop CIMA × Hike</title>
+    <meta name="description"
+        content="Workshop intensivo de IA: Gemini, ChatGPT, Claude, herramientas de productividad, agentes enterprise y coding agents.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-light: #38bdf8;
+            --secondary: #6366f1;
+            --accent: #06b6d4;
+            --border: rgba(100, 116, 139, .14);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            background: #f8fafc;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        h1,
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+            letter-spacing: -.02em
+        }
+
+        h3,
+        h4 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -.01em
+        }
+
+        .bg-main {
+            background: radial-gradient(circle at 85% 5%, rgba(14, 165, 233, .06), transparent 40%), radial-gradient(circle at 5% 85%, rgba(99, 102, 241, .055), transparent 40%), #f8fafc
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04), 0 4px 16px rgba(0, 0, 0, .04)
+        }
+
+        .card-elevated {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .07)
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            border: none;
+            transition: all .3s;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, .25);
+            display: inline-block
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(14, 165, 233, .38)
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .tag-sky {
+            background: rgba(14, 165, 233, .16);
+            color: #0369a1;
+            border: 1px solid rgba(14, 165, 233, 0.35)
+        }
+
+        .tag-indigo {
+            background: rgba(99, 102, 241, .16);
+            color: #4338ca;
+            border: 1px solid rgba(99, 102, 241, 0.35)
+        }
+
+        .tag-violet {
+            background: rgba(139, 92, 246, .16);
+            color: #6d28d9;
+            border: 1px solid rgba(139, 92, 246, 0.35)
+        }
+
+        .tag-amber {
+            background: rgba(245, 158, 11, .16);
+            color: #92400e;
+            border: 1px solid rgba(245, 158, 11, 0.35)
+        }
+
+        .tag-emerald {
+            background: rgba(16, 185, 129, .09);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, .16)
+        }
+
+        .tag-rose {
+            background: rgba(239, 68, 68, .09);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, .14)
+        }
+
+        .tag-cyan {
+            background: rgba(6, 182, 212, .09);
+            color: #0891b2;
+            border: 1px solid rgba(6, 182, 212, .16)
+        }
+
+        .card-hover {
+            transition: all .35s ease
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .10);
+            border-color: rgba(14, 165, 233, .22)
+        }
+
+        .scroll-reveal {
+            transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .scroll-reveal.will-animate {
+            opacity: 0;
+            transform: translateY(24px)
+        }
+
+        .scroll-reveal.active {
+            opacity: 1 !important;
+            transform: translateY(0) !important
+        }
+
+        .stagger-1 {
+            transition-delay: .08s
+        }
+
+        .stagger-2 {
+            transition-delay: .16s
+        }
+
+        .stagger-3 {
+            transition-delay: .24s
+        }
+
+        .stagger-4 {
+            transition-delay: .32s
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(14, 165, 233, .07), transparent 65%);
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .05)
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .float-anim {
+            animation: float 5s ease-in-out infinite
+        }
+
+        /* Sidebar */
+        #side-nav {
+            position: fixed;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+            display: none;
+            flex-direction: column;
+            background: rgba(255, 255, 255, .88);
+            backdrop-filter: blur(14px);
+            padding: 18px 12px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, .7);
+            box-shadow: 0 6px 28px rgba(15, 23, 42, .09);
+            width: 148px
+        }
+
+        @media(min-width:1024px) {
+            #side-nav {
+                display: flex
+            }
+        }
+
+        .snav-logo {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            margin: 0 auto 12px;
+            display: block;
+            opacity: .75
+        }
+
+        .snav-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(100, 116, 139, .14);
+            margin-bottom: 8px
+        }
+
+        .snav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background .2s
+        }
+
+        .snav-item:hover {
+            background: rgba(14, 165, 233, .06)
+        }
+
+        .snav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            flex-shrink: 0;
+            transition: all .25s
+        }
+
+        .snav-item:hover .snav-dot,
+        .snav-item.active .snav-dot {
+            background: #0ea5e9
+        }
+
+        .snav-item.active .snav-dot {
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, .18)
+        }
+
+        .snav-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #94a3b8;
+            white-space: nowrap;
+            transition: color .2s
+        }
+
+        .snav-item:hover .snav-label {
+            color: #0ea5e9
+        }
+
+        .snav-item.active .snav-label {
+            color: #0f172a;
+            font-weight: 700
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0f172a, #0c1a3a);
+            color: #fff
+        }
+
+        /* Gem card */
+        .gem-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, .04), rgba(99, 102, 241, .04));
+            border: 1px solid rgba(14, 165, 233, .12);
+            border-radius: 18px;
+            padding: 1.5rem;
+            transition: all .3s
+        }
+
+        .gem-card:hover {
+            border-color: rgba(14, 165, 233, .3);
+            box-shadow: 0 8px 24px rgba(14, 165, 233, .1);
+            transform: translateY(-2px)
+        }
+
+        section[id],
+        header[id] {
+            scroll-margin-top: 80px
+        }
+
+        /* Agenda blocks */
+        .agenda-block {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+        }
+
+        .agenda-block-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid rgba(100, 116, 139, .1);
+        }
+
+        .agenda-block-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .agenda-block-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .agenda-block-desc {
+            font-size: .85rem;
+            color: #64748b;
+            font-weight: 300;
+        }
+
+        .agenda-break-sep {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .agenda-break-sep .break-line {
+            flex: 1;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, #cbd5e1 0, #cbd5e1 6px, transparent 6px, transparent 12px);
+        }
+
+        .agenda-break-sep .break-label {
+            font-size: .8rem;
+            font-weight: 500;
+            color: #94a3b8;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        /* Partner logos */
+        .partner-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-logos img,
+        .partner-logos svg {
+            height: 40px;
+            object-fit: contain;
+            opacity: .7;
+        }
+
+        .partner-logos .logo-divider {
+            width: 1px;
+            height: 28px;
+            background: rgba(100, 116, 139, .2);
+        }
+
+        /* Bibliography links */
+        .bib-link {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            padding: .75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff;
+            text-decoration: none !important;
+            color: #334155;
+            font-size: .85rem;
+            font-weight: 500;
+            transition: all .25s;
+        }
+
+        .bib-link:hover {
+            border-color: rgba(14, 165, 233, .3);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, .08);
+            transform: translateY(-1px);
+        }
+
+        .bib-link .bib-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        /* FAQ items */
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all .25s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(99, 102, 241, .2);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: .9rem;
+            font-weight: 600;
+            color: #1e293b;
+            transition: background .2s;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .faq-question:hover {
+            background: rgba(99, 102, 241, .03);
+        }
+
+        .faq-answer {
+            padding: 0 1.25rem 1rem;
+            font-size: .85rem;
+            color: #64748b;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Location card */
+        .location-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, .03), rgba(99, 102, 241, .03));
+            border: 1px solid rgba(14, 165, 233, .12);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all .3s;
+        }
+
+        .location-card:hover {
+            border-color: rgba(14, 165, 233, .3);
+            box-shadow: 0 8px 24px rgba(14, 165, 233, .1);
+        }
+
+        /* Tool card */
+        .tool-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: all .3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
+            border-color: rgba(14, 165, 233, .2);
+        }
+    </style>
+</head>
+
+<body class="bg-main font-light">
+
+    <div class="hero-glow"></div>
+
+    <!-- ── Sidebar Nav ── -->
+    <nav id="side-nav">
+        <img src="hikelogo-violet.png" alt="Hike" class="snav-logo">
+        <div class="snav-divider"></div>
+        <div class="snav-item active" data-section="hero">
+            <div class="snav-dot"></div><span class="snav-label">Inicio</span>
+        </div>
+        <div class="snav-item" data-section="agenda">
+            <div class="snav-dot"></div><span class="snav-label">Agenda</span>
+        </div>
+        <div class="snav-item" data-section="sec-intro">
+            <div class="snav-dot"></div><span class="snav-label">Intro</span>
+        </div>
+        <div class="snav-item" data-section="sec-gemini">
+            <div class="snav-dot"></div><span class="snav-label">AI General</span>
+        </div>
+        <div class="snav-item" data-section="sec-tools">
+            <div class="snav-dot"></div><span class="snav-label">Tools</span>
+        </div>
+        <div class="snav-item" data-section="sec-enterprise">
+            <div class="snav-dot"></div><span class="snav-label">Enterprise</span>
+        </div>
+        <div class="snav-item" data-section="sec-antigravity">
+            <div class="snav-dot"></div><span class="snav-label">Coding AI</span>
+        </div>
+        <div class="snav-item" data-section="ubicacion">
+            <div class="snav-dot"></div><span class="snav-label">Ubicación</span>
+        </div>
+        <a href="feedback.html" class="snav-item"
+            style="text-decoration:none;color:inherit;margin-top:.5rem;opacity:.7">
+            <div class="snav-dot" style="background:#10b981"></div><span class="snav-label">Feedback</span>
+        </a>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+    <header id="hero" class="relative pt-44 pb-28 px-6 max-w-6xl mx-auto text-center z-10">
+        <div class="scroll-reveal active">
+            <div class="partner-logos">
+                <img src="hikelogo-violet.png" alt="Hike Ecosystem">
+                <div class="logo-divider"></div>
+                <!-- CIMA Logo SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="171" height="41" viewBox="0 0 171 41" fill="none" style="height:48px;width:auto">
+                    <g clip-path="url(#clip0_cima)">
+                        <path d="M57.2227 24.0283V16.72C57.2227 7.1185 63.0788 0.769287 71.288 0.769287C77.8742 0.769287 83.3154 4.34306 83.8879 12.1336H79.5496C78.9194 6.8506 76.309 4.34842 71.3405 4.34842C65.3793 4.34842 61.7185 9.04201 61.7185 16.7254V23.9801C61.7185 31.717 65.0641 36.3034 71.3405 36.3034C76.1515 36.3034 79.6021 33.5816 80.1221 27.8217H84.203C83.473 36.2498 78.2943 39.9308 71.288 39.9308C62.5011 39.9308 57.2227 33.7959 57.2227 24.0336V24.0283Z" fill="#1e293b"/>
+                        <path d="M92.1436 0.769287H96.6026V39.9522H92.1436V0.769287Z" fill="#1e293b"/>
+                        <path d="M106.162 0.769287H112.176L121.682 29.9221L130.926 0.769287H137.05V39.9522H132.591V7.72931L122.118 39.9522H120.831L110.574 7.6275V39.8504L106.167 39.9522V0.769287H106.162Z" fill="#1e293b"/>
+                        <path d="M160.684 0.769287H154.403L143.925 39.9522H148.447L151.32 29.3488L152.292 25.7268L157.675 6.7863L162.833 25.7053L163.799 29.3166L166.541 39.9522H171L160.684 0.769287Z" fill="#1e293b"/>
+                        <path d="M34.3123 18.5149L27.5265 25.4374C27.5265 25.4374 27.5265 25.4374 27.5107 25.4535L27.579 25.5231L27.5212 25.5981L33.5402 31.7384L40.4048 24.7355L34.307 18.5149H34.3123Z" fill="#75A0AA"/>
+                        <path d="M27.5896 25.5178L21.5076 19.3132L7.0957 34.0102L13.1882 40.2308L27.5214 25.6089" fill="#9CC0CA"/>
+                        <path d="M27.2225 0.919312L20.4367 7.84182C20.4367 7.84182 20.4367 7.84182 20.4209 7.8579L20.4892 7.92755L20.4314 8.00256L26.4504 14.1428L33.315 7.13993L27.2225 0.919312Z" fill="#75A0AA"/>
+                        <path d="M20.494 7.92755L14.4119 1.71765L0 16.42L6.09776 22.6352L20.4257 8.01328" fill="#9CC0CA"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_cima">
+                            <rect width="171" height="39.4615" fill="white" transform="translate(0 0.769287)"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <span class="tag tag-sky mb-6 inline-block">Workshop · Miércoles 10 de Junio · 9:00 a 13:00 hs</span>
+            <h1 class="text-5xl md:text-7xl font-light mb-6 leading-[1.1] tracking-tight text-slate-900">
+                Inteligencia Artificial<br><span class="gradient-text">del concepto a la acción</span>
+            </h1>
+            <p class="text-xl text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+                Un recorrido por las herramientas más potentes del ecosistema de IA: desde <span
+                    class="font-normal text-slate-700">Gemini, ChatGPT y Claude</span> hasta
+                <span class="font-normal text-slate-700">agentes enterprise</span> y coding agents de última generación.<br>
+                <span class="text-xs text-slate-400 mt-4 font-normal flex items-center justify-center gap-1.5"><i data-lucide="video" class="w-3.5 h-3.5 text-emerald-500"></i> Todo el workshop quedará grabado y documentado</span>
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#agenda" class="btn-primary px-8 py-4 rounded-xl font-medium" style="text-decoration:none">Ver
+                    la agenda →</a>
+                <a href="#ubicacion"
+                    class="flex items-center gap-2 px-8 py-4 rounded-xl font-medium border-2 border-slate-200 bg-white text-slate-700 hover:border-sky-300 hover:text-sky-700 transition-all"
+                    style="text-decoration:none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Cómo llegar
+                </a>
+            </div>
+            <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="feedback.html"
+                    class="flex items-center gap-2 px-6 py-3 rounded-xl font-medium border-2 border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-100 transition-all text-sm w-full sm:w-auto justify-center"
+                    style="text-decoration:none">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    Ver resultados del feedback
+                </a>
+                <a href="https://chat.whatsapp.com/K16MS3bjdvFCyRSzxg2HiT?mode=gi_t" target="_blank"
+                    class="flex items-center gap-2 px-6 py-3 rounded-xl font-medium border-2 border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-100 transition-all text-sm w-full sm:w-auto justify-center"
+                    style="text-decoration:none">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-3.559c1.649.979 3.26 1.492 4.805 1.493 5.464.002 9.909-4.386 9.913-9.777.002-2.611-1.015-5.066-2.863-6.918C16.597 3.385 14.153 2.37 11.606 2.37c-5.467 0-9.914 4.387-9.919 9.779-.002 1.933.51 3.818 1.482 5.468L2.122 21.84l4.525-1.399zm11.332-6.52c-.312-.156-1.847-.91-2.133-1.014-.286-.104-.494-.156-.702.156-.208.312-.806 1.014-.988 1.222-.182.208-.364.234-.676.078-1.546-.613-2.695-1.18-3.774-3.024-.285-.487.285-.452.816-1.511.088-.176.044-.33-.022-.46-.066-.13-.586-1.41-.802-1.932-.211-.508-.426-.438-.585-.446-.151-.008-.325-.01-.499-.01-.174 0-.459.065-.698.325-.24.26-1.127 1.103-1.127 2.689 0 1.587 1.153 3.12 1.314 3.337.162.217 2.268 3.463 5.49 4.856.766.331 1.365.529 1.831.677.77.244 1.472.21 2.026.128.618-.092 1.847-.754 2.107-1.444.26-.69.26-1.287.182-1.413-.078-.127-.286-.234-.598-.39z"/>
+                    </svg>
+                    Grupo de WhatsApp (Soporte)
+                </a>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mt-20 scroll-reveal stagger-2">
+            <div class="stat-card float-anim">
+                <div class="text-4xl font-light gradient-text mb-2">5</div>
+                <div class="text-sm font-light text-slate-600">Secciones</div>
+                <div class="text-xs font-light text-slate-400" style="letter-spacing:.05em">Temáticas</div>
+            </div>
+            <div class="stat-card float-anim" style="animation-delay:.4s">
+                <div class="text-4xl font-light gradient-text mb-2">4h</div>
+                <div class="text-sm font-light text-slate-600">Duración</div>
+                <div class="text-xs font-light text-slate-400" style="letter-spacing:.05em">Media jornada</div>
+            </div>
+            <div class="stat-card float-anim" style="animation-delay:.8s">
+                <div class="text-4xl font-light gradient-text mb-2">10+</div>
+                <div class="text-sm font-light text-slate-600">Herramientas</div>
+                <div class="text-xs font-light text-slate-400" style="letter-spacing:.05em">De IA en vivo</div>
+            </div>
+            <div class="stat-card float-anim" style="animation-delay:1.2s">
+                <div class="text-4xl font-light gradient-text mb-2">3</div>
+                <div class="text-sm font-light text-slate-600">Coding Agents</div>
+                <div class="text-xs font-light text-slate-400" style="letter-spacing:.05em">En vivo</div>
+            </div>
+        </div>
+
+        <!-- Module overview cards -->
+        <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto mt-16 scroll-reveal stagger-3">
+            <div class="card p-4 text-left card-hover">
+                <div class="flex items-center gap-2 mb-2"><span class="tag tag-cyan">01</span></div>
+                <p class="font-medium text-slate-800 text-sm mb-1">Intro a la IA</p>
+                <p class="text-slate-500 text-xs leading-relaxed font-light">Contexto general del estado actual de la inteligencia artificial.</p>
+            </div>
+            <div class="card p-4 text-left card-hover">
+                <div class="flex items-center gap-2 mb-2"><span class="tag tag-sky">02</span></div>
+                <p class="font-medium text-slate-800 text-sm mb-1">AI General</p>
+                <p class="text-slate-500 text-xs leading-relaxed font-light">Gemini, ChatGPT, Claude, NotebookLM, Deep Research, Veo y más.</p>
+            </div>
+            <div class="card p-4 text-left card-hover">
+                <div class="flex items-center gap-2 mb-2"><span class="tag tag-violet">03</span></div>
+                <p class="font-medium text-slate-800 text-sm mb-1">Herramientas</p>
+                <p class="text-slate-500 text-xs leading-relaxed font-light">Pasada rápida por Gamma, Suno y Higgsfield.</p>
+            </div>
+            <div class="card p-4 text-left card-hover">
+                <div class="flex items-center gap-2 mb-2"><span class="tag tag-indigo">04</span></div>
+                <p class="font-medium text-slate-800 text-sm mb-1">Gemini Enterprise</p>
+                <p class="text-slate-500 text-xs leading-relaxed font-light">Agent Builder y agentes corporativos.</p>
+            </div>
+            <div class="card p-4 text-left card-hover">
+                <div class="flex items-center gap-2 mb-2"><span class="tag tag-amber">05</span></div>
+                <p class="font-medium text-slate-800 text-sm mb-1">Coding Agents</p>
+                <p class="text-slate-500 text-xs leading-relaxed font-light">Antigravity, Claude Code y Cursor en acción.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════
+     AGENDA
+══════════════════════════════════════ -->
+    <section id="agenda" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6 md:px-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="tag tag-sky mb-4 inline-block">Programa del día</span>
+                <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Agenda del workshop</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto font-light">Una mañana intensiva de 9:00 a 13:00 hs, con desayuno de bienvenida y finger food al cierre. Todo el workshop quedará grabado y documentado.</p>
+            </div>
+
+            <div class="scroll-reveal space-y-4">
+
+                <!-- Desayuno -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #f59e0b">
+                    <div class="flex items-center gap-4">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">
+                            <i data-lucide="coffee" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="agenda-block-title">Desayuno y bienvenida</div>
+                            <div class="agenda-block-desc">9:00 hs — Recepción, café y networking</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arranque -->
+                <div class="agenda-break-sep">
+                    <div class="break-line"></div>
+                    <div class="break-label"><i data-lucide="play" class="w-4 h-4"></i> Arranque ~9:30 hs</div>
+                    <div class="break-line"></div>
+                </div>
+
+                <!-- Sección 1: Intro -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #06b6d4">
+                    <div class="agenda-block-header">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">1</div>
+                        <div>
+                            <div class="agenda-block-title">Introducción a la IA</div>
+                            <div class="agenda-block-desc">Panorama del estado actual de la inteligencia artificial y su impacto en el negocio.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 2: AI General -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #0ea5e9">
+                    <div class="agenda-block-header">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)">2</div>
+                        <div>
+                            <div class="agenda-block-title">AI General</div>
+                            <div class="agenda-block-desc">Gemini, ChatGPT, Claude — NotebookLM, Deep Research, Nanobanana, Veo y AI Studio. Conceptos trasladables entre plataformas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 3: Herramientas -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #8b5cf6">
+                    <div class="agenda-block-header">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)">3</div>
+                        <div>
+                            <div class="agenda-block-title">Herramientas complementarias</div>
+                            <div class="agenda-block-desc">Pasada rápida por Gamma, Suno y Higgsfield — presentaciones, música e IA visual.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 4: Enterprise -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #6366f1">
+                    <div class="agenda-block-header">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#4338ca,#6366f1)">4</div>
+                        <div>
+                            <div class="agenda-block-title">Gemini Enterprise</div>
+                            <div class="agenda-block-desc">Agent Builder: construcción de agentes corporativos con datos reales.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 5: Coding Agents -->
+                <div class="agenda-block card-elevated" style="border-left:3px solid #f59e0b">
+                    <div class="agenda-block-header">
+                        <div class="agenda-block-num" style="background:linear-gradient(135deg,#b45309,#f59e0b)">5</div>
+                        <div>
+                            <div class="agenda-block-title">Coding Agents — El siguiente nivel</div>
+                            <div class="agenda-block-desc">Antigravity (Google), Claude Code (Anthropic) y Cursor — operando con IA a nivel profundo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cierre -->
+                <div class="agenda-break-sep" style="padding:1.25rem 0">
+                    <div class="break-line"></div>
+                    <div class="break-label"><i data-lucide="utensils" class="w-4 h-4"></i> Finger food y cierre · ~13:00 hs</div>
+                    <div class="break-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SECCIÓN 1 — INTRO A LA IA
+══════════════════════════════════════ -->
+    <section id="sec-intro" class="py-24 px-6 md:px-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="tag tag-cyan mb-4 inline-block">Sección 01</span>
+            <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Introducción a la Inteligencia Artificial</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light">Panorama del estado actual de la IA, modelos fundacionales y cómo las empresas están adoptando estas tecnologías para transformar sus operaciones.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 scroll-reveal">
+            <div class="card-elevated p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
+                        <i data-lucide="brain" class="w-5 h-5 text-cyan-600"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-slate-800 mb-2 text-base">Modelos Fundacionales</h3>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Qué son los LLMs, cómo funcionan y por qué cambiaron las reglas del juego para todas las industrias.</p>
+            </div>
+            <div class="card-elevated p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-cyan-600"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-slate-800 mb-2 text-base">Estado del Arte</h3>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Lo último en IA generativa, multimodal y agentes: dónde estamos hoy y hacia dónde vamos.</p>
+            </div>
+            <div class="card-elevated p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
+                        <i data-lucide="building-2" class="w-5 h-5 text-cyan-600"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-slate-800 mb-2 text-base">Impacto Empresarial</h3>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Casos de uso reales en finanzas, operaciones, marketing y recursos humanos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SECCIÓN 2 — AI GENERAL
+══════════════════════════════════════ -->
+    <section id="sec-gemini" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6 md:px-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="tag tag-sky mb-4 inline-block">Sección 02</span>
+                <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">AI General</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto font-light">Las plataformas y herramientas de IA que están transformando la productividad. Los ejemplos se muestran principalmente en Gemini, pero los conceptos son trasladables a ChatGPT, Claude y otras plataformas.</p>
+            </div>
+
+            <!-- Platform callout -->
+            <div class="card-elevated p-5 mb-8 scroll-reveal" style="background:linear-gradient(135deg,rgba(14,165,233,.02),rgba(139,92,246,.02))">
+                <div class="flex flex-wrap items-center justify-center gap-6 text-center">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(14,165,233,.1)">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-sky-600"></i>
+                        </div>
+                        <span class="text-sm font-medium text-slate-700">Gemini</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(16,185,129,.1)">
+                            <i data-lucide="bot" class="w-4 h-4 text-emerald-600"></i>
+                        </div>
+                        <span class="text-sm font-medium text-slate-700">ChatGPT</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,.1)">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-amber-600"></i>
+                        </div>
+                        <span class="text-sm font-medium text-slate-700">Claude</span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-light w-full">Conceptos aplicables a cualquier plataforma · Demos en Gemini</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 scroll-reveal">
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(14,165,233,.1)">
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-sky-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">NotebookLM</h3>
+                            <p class="text-xs text-slate-400 font-light">Google</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Cargá documentos y generá resúmenes, guías de estudio, FAQs e incluso podcasts a partir de tus fuentes.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(99,102,241,.1)">
+                            <i data-lucide="search" class="w-5 h-5 text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">Deep Research</h3>
+                            <p class="text-xs text-slate-400 font-light">Gemini · ChatGPT</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Investigación multi-paso exhaustiva: lee múltiples fuentes, cruza información y genera reportes con citas. Disponible en Gemini y ChatGPT.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(245,158,11,.1)">
+                            <i data-lucide="image" class="w-5 h-5 text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">Nanobanana</h3>
+                            <p class="text-xs text-slate-400 font-light">Google</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Generación y edición de imágenes con IA. Concepto similar a DALL-E (OpenAI) y la generación de imágenes de Claude.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(139,92,246,.1)">
+                            <i data-lucide="video" class="w-5 h-5 text-violet-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">Veo</h3>
+                            <p class="text-xs text-slate-400 font-light">Google DeepMind</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Generación de video con IA: creá clips profesionales desde un prompt de texto.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(16,185,129,.1)">
+                            <i data-lucide="flask-conical" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">AI Studio</h3>
+                            <p class="text-xs text-slate-400 font-light">Google</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Playground de desarrollo rápido para probar modelos, ajustar prompts y prototipar soluciones.</p>
+                </div>
+
+                <div class="tool-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(16,185,129,.1)">
+                            <i data-lucide="bot" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-800 text-sm">ChatGPT & Claude</h3>
+                            <p class="text-xs text-slate-400 font-light">OpenAI · Anthropic</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-xs leading-relaxed font-light">Las otras dos grandes plataformas de IA conversacional. Comparamos capacidades, fortalezas y casos de uso ideales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SECCIÓN 3 — HERRAMIENTAS COMPLEMENTARIAS
+══════════════════════════════════════ -->
+    <section id="sec-tools" class="py-24 px-6 md:px-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="tag tag-violet mb-4 inline-block">Sección 03</span>
+            <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Herramientas complementarias</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light">Una pasada rápida por otras herramientas de IA que están potenciando la creación de contenido: presentaciones, música y video.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 scroll-reveal">
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(99,102,241,.15))">
+                        <i data-lucide="presentation" class="w-6 h-6 text-violet-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Gamma</h3>
+                        <span class="text-xs text-slate-400 font-light">Presentaciones con IA</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Creá presentaciones profesionales en segundos. Solo describí tu contenido y Gamma arma los slides automáticamente.</p>
+                <a href="https://gamma.app" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-violet-600 font-medium hover:underline">
+                    gamma.app <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(245,158,11,.15))">
+                        <i data-lucide="music" class="w-6 h-6 text-rose-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Suno</h3>
+                        <span class="text-xs text-slate-400 font-light">Música con IA</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Generá canciones completas con letra y música a partir de un texto. Ideal para jingles, contenido y creatividad.</p>
+                <a href="https://suno.com" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-rose-600 font-medium hover:underline">
+                    suno.com <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(6,182,212,.15))">
+                        <i data-lucide="clapperboard" class="w-6 h-6 text-sky-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Higgsfield</h3>
+                        <span class="text-xs text-slate-400 font-light">Video con IA</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Herramienta de generación de video con IA avanzada para clips creativos y contenido visual de alto impacto.</p>
+                <a href="https://higgsfield.ai" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-sky-600 font-medium hover:underline">
+                    higgsfield.ai <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SECCIÓN 4 — GEMINI ENTERPRISE
+══════════════════════════════════════ -->
+    <section id="sec-enterprise" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6 md:px-10">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="tag tag-indigo mb-4 inline-block">Sección 04</span>
+                <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Gemini Enterprise</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto font-light">La plataforma de Google Cloud para construir agentes corporativos con datos reales de tu empresa, controlados y seguros.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 scroll-reveal">
+                <div class="card-elevated p-7">
+                    <div class="flex items-center gap-2 mb-4"><span class="tag tag-indigo">Agent Builder</span></div>
+                    <h3 class="font-medium text-slate-800 mb-2 text-lg">Construí agentes sin código</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed font-light mb-4">Agent Builder permite crear agentes conversacionales que conectan con tus datos corporativos: documentos, bases de datos y APIs de terceros.</p>
+                    <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100 text-xs text-slate-600 leading-relaxed italic font-light">
+                        Ideal para: asistentes de RH, bots de soporte interno, agentes de consulta de datos financieros y más.
+                    </div>
+                </div>
+                <div class="card-elevated p-7">
+                    <div class="flex items-center gap-2 mb-4"><span class="tag tag-sky">Seguridad Enterprise</span></div>
+                    <h3 class="font-medium text-slate-800 mb-2 text-lg">Control total de los datos</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed font-light mb-4">Los datos nunca salen del entorno corporativo. Gemini Enterprise opera dentro de los controles de seguridad de Google Cloud con VPC Service Controls y cifrado CMEK.</p>
+                    <div class="bg-sky-50/50 p-4 rounded-xl border border-sky-100 text-xs text-slate-600 leading-relaxed italic font-light">
+                        Las respuestas del modelo se anclan en los datos reales de la empresa usando RAG (Retrieval-Augmented Generation).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     SECCIÓN 5 — CODING AGENTS
+══════════════════════════════════════ -->
+    <section id="sec-antigravity" class="py-24 px-6 md:px-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="tag tag-amber mb-4 inline-block">Sección 05</span>
+            <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Coding Agents — El siguiente nivel</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light">Más allá de chatear con IA: operar directamente desde agentes que escriben, ejecutan y depuran código. El nivel más profundo del workshop.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 scroll-reveal">
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(99,102,241,.15))">
+                        <i data-lucide="rocket" class="w-6 h-6 text-sky-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Antigravity</h3>
+                        <span class="text-xs text-slate-400 font-light">Google</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">El SDK de Google para diseñar, implementar y orquestar agentes autónomos de IA. Permite crear sistemas multi-agente con capacidad de razonamiento avanzado.</p>
+                <a href="https://cloud.google.com/products/agentspace" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-sky-600 font-medium hover:underline">
+                    Google Antigravity <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.15))">
+                        <i data-lucide="terminal" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Claude Code</h3>
+                        <span class="text-xs text-slate-400 font-light">Anthropic</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">Agente de terminal de Anthropic que entiende tu codebase completo, ejecuta comandos y hace cambios multi-archivo de forma autónoma.</p>
+                <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-amber-600 font-medium hover:underline">
+                    Claude Code <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+
+            <div class="card-elevated p-7 card-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(99,102,241,.15))">
+                        <i data-lucide="code" class="w-6 h-6 text-violet-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800 text-lg">Cursor</h3>
+                        <span class="text-xs text-slate-400 font-light">Cursor Inc.</span>
+                    </div>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed font-light">IDE con IA integrada: autocompletado inteligente, chat con contexto del proyecto y agentes que implementan features completos.</p>
+                <a href="https://cursor.com" target="_blank" class="mt-4 inline-flex items-center gap-1 text-xs text-violet-600 font-medium hover:underline">
+                    cursor.com <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="card-elevated p-6 mt-8 scroll-reveal" style="background:linear-gradient(135deg,rgba(245,158,11,.03),rgba(139,92,246,.03))">
+            <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#f59e0b,#8b5cf6)">
+                    <i data-lucide="info" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h4 class="font-medium text-slate-800 text-sm mb-1">¿Por qué es el siguiente nivel?</h4>
+                    <p class="text-slate-500 text-xs font-light leading-relaxed">Mientras las secciones anteriores muestran cómo <em>conversar</em> con IA, acá vemos cómo <em>operar</em> con IA: agentes que leen tu código, entienden tu arquitectura, ejecutan tests y despliegan cambios. Es la frontera actual de productividad con IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     UBICACIÓN
+══════════════════════════════════════ -->
+    <section id="ubicacion" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6 md:px-10">
+            <div class="text-center mb-12 scroll-reveal">
+                <span class="tag tag-emerald mb-4 inline-block">Ubicación</span>
+                <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Cómo llegar</h2>
+            </div>
+
+            <div class="location-card scroll-reveal">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#10b981,#06b6d4)">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800 text-lg">Oficinas ABN Digital</h3>
+                                <p class="text-sm text-slate-500 font-light">Nuestras oficinas en Florida</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-600 font-light">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="building-2" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+                                <span><strong class="font-medium text-slate-800">Blas Parera 51, Piso 6</strong><br>Florida, Buenos Aires</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="calendar" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+                                <span><strong class="font-medium text-slate-800">Miércoles 10 de Junio de 2026</strong><br>9:00 a 13:00 hs</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="coffee" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+                                <span>Desayuno a las 9:00 · Finger food al cierre</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.app.goo.gl/NaBsR3ZkNa3E1mzaA" target="_blank"
+                            class="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm border-2 border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-100 transition-all"
+                            style="text-decoration:none">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            Abrir en Google Maps
+                        </a>
+                    </div>
+                    <div class="w-full md:w-80 h-56 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Blas%20Parera%2051,%20Florida,%20Buenos%20Aires&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     RECURSOS
+══════════════════════════════════════ -->
+    <section id="recursos" class="py-24 px-6 md:px-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="tag tag-sky mb-4 inline-block">Recursos</span>
+            <h2 class="text-4xl md:text-5xl font-medium mb-4 text-slate-900">Herramientas y recursos</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto font-light">Links directos a todas las herramientas mencionadas durante el workshop.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-16 scroll-reveal">
+            <a href="https://notebooklm.google.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(14,165,233,.1);color:#0284c7"><i data-lucide="notebook-pen" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">NotebookLM</p>
+                    <p class="text-xs text-slate-400 font-light">Síntesis y exploración de documentos con IA.</p>
+                </div>
+            </a>
+            <a href="https://gemini.google.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(99,102,241,.1);color:#4f46e5"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Gemini — Deep Research</p>
+                    <p class="text-xs text-slate-400 font-light">Investigación profunda con capacidades multi-paso.</p>
+                </div>
+            </a>
+            <a href="https://aistudio.google.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(16,185,129,.1);color:#059669"><i data-lucide="flask-conical" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Google AI Studio</p>
+                    <p class="text-xs text-slate-400 font-light">Playground para prototipar con modelos Gemini.</p>
+                </div>
+            </a>
+            <a href="https://gamma.app" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(139,92,246,.1);color:#7c3aed"><i data-lucide="presentation" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Gamma</p>
+                    <p class="text-xs text-slate-400 font-light">Presentaciones generadas con IA en segundos.</p>
+                </div>
+            </a>
+            <a href="https://suno.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(239,68,68,.1);color:#dc2626"><i data-lucide="music" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Suno</p>
+                    <p class="text-xs text-slate-400 font-light">Generación de música y canciones con IA.</p>
+                </div>
+            </a>
+            <a href="https://higgsfield.ai" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(6,182,212,.1);color:#0891b2"><i data-lucide="clapperboard" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Higgsfield</p>
+                    <p class="text-xs text-slate-400 font-light">Generación de video con IA avanzada.</p>
+                </div>
+            </a>
+            <a href="https://cloud.google.com/products/gemini/enterprise" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(14,165,233,.1);color:#0284c7"><i data-lucide="cloud" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Gemini Enterprise — Google Cloud</p>
+                    <p class="text-xs text-slate-400 font-light">Plataforma de agentes corporativos de Google.</p>
+                </div>
+            </a>
+            <a href="https://cloud.google.com/products/agentspace" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(245,158,11,.1);color:#b45309"><i data-lucide="rocket" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Antigravity — Google</p>
+                    <p class="text-xs text-slate-400 font-light">SDK de agentes autónomos de Google.</p>
+                </div>
+            </a>
+            <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(245,158,11,.1);color:#b45309"><i data-lucide="terminal" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Claude Code — Anthropic</p>
+                    <p class="text-xs text-slate-400 font-light">Agente de terminal para desarrollo de software.</p>
+                </div>
+            </a>
+            <a href="https://cursor.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(139,92,246,.1);color:#7c3aed"><i data-lucide="code" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Cursor</p>
+                    <p class="text-xs text-slate-400 font-light">IDE con IA integrada para desarrollo.</p>
+                </div>
+            </a>
+            <a href="https://chatgpt.com" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(16,185,129,.1);color:#059669"><i data-lucide="bot" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">ChatGPT — OpenAI</p>
+                    <p class="text-xs text-slate-400 font-light">Plataforma de IA conversacional de OpenAI.</p>
+                </div>
+            </a>
+            <a href="https://claude.ai" target="_blank" class="bib-link">
+                <div class="bib-icon" style="background:rgba(245,158,11,.1);color:#b45309"><i data-lucide="message-circle" class="w-5 h-5"></i></div>
+                <div>
+                    <p class="font-semibold text-sm text-slate-800 mb-0.5">Claude — Anthropic</p>
+                    <p class="text-xs text-slate-400 font-light">Asistente de IA conversacional de Anthropic.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Soporte Post-Workshop (WhatsApp) -->
+        <div class="mt-8 p-6 rounded-2xl border-2 border-emerald-100 bg-emerald-50/50 flex flex-col sm:flex-row items-center justify-between gap-6 scroll-reveal">
+            <div class="flex items-start gap-4 text-left">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20 mt-1">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-3.559c1.649.979 3.26 1.492 4.805 1.493 5.464.002 9.909-4.386 9.913-9.777.002-2.611-1.015-5.066-2.863-6.918C16.597 3.385 14.153 2.37 11.606 2.37c-5.467 0-9.914 4.387-9.919 9.779-.002 1.933.51 3.818 1.482 5.468L2.122 21.84l4.525-1.399zm11.332-6.52c-.312-.156-1.847-.91-2.133-1.014-.286-.104-.494-.156-.702.156-.208.312-.806 1.014-.988 1.222-.182.208-.364.234-.676.078-1.546-.613-2.695-1.18-3.774-3.024-.285-.487.285-.452.816-1.511.088-.176.044-.33-.022-.46-.066-.13-.586-1.41-.802-1.932-.211-.508-.426-.438-.585-.446-.151-.008-.325-.01-.499-.01-.174 0-.459.065-.698.325-.24.26-1.127 1.103-1.127 2.689 0 1.587 1.153 3.12 1.314 3.337.162.217 2.268 3.463 5.49 4.856.766.331 1.365.529 1.831.677.77.244 1.472.21 2.026.128.618-.092 1.847-.754 2.107-1.444.26-.69.26-1.287.182-1.413-.078-.127-.286-.234-.598-.39z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-800 text-base mb-0.5">Grupo de WhatsApp — Soporte Post-Workshop</h4>
+                    <p class="text-sm text-slate-500 font-light leading-relaxed">Sumate a nuestro grupo de WhatsApp para recibir soporte técnico del equipo Hike, plantillas exclusivas y material post-evento.</p>
+                </div>
+            </div>
+            <a href="https://chat.whatsapp.com/K16MS3bjdvFCyRSzxg2HiT?mode=gi_t" target="_blank"
+                class="btn-emerald px-6 py-3 rounded-xl font-medium text-sm text-emerald-700 border-2 border-emerald-200 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-300 transition-all shrink-0 flex items-center gap-2"
+                style="text-decoration:none">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                Unirme al grupo
+            </a>
+        </div>
+
+        <!-- FAQs -->
+        <div class="scroll-reveal">
+            <h3 class="text-2xl font-medium text-slate-900 mb-8 text-center">Preguntas Frecuentes</h3>
+            <div class="max-w-3xl mx-auto space-y-3">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAccordion('faq1')">
+                        ¿Necesito traer mi computadora?
+                        <span id="icon-faq1" class="transform transition-transform duration-300"><svg
+                                class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg></span>
+                    </button>
+                    <div id="content-faq1" class="hidden faq-answer">
+                        No es obligatorio, pero es recomendable si querés explorar las herramientas en tiempo real junto con nosotros. Si no traés laptop, podés seguir las demostraciones en pantalla.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAccordion('faq2')">
+                        ¿Necesito conocimientos técnicos previos?
+                        <span id="icon-faq2" class="transform transition-transform duration-300"><svg
+                                class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg></span>
+                    </button>
+                    <div id="content-faq2" class="hidden faq-answer">
+                        No. El workshop está diseñado para todos los niveles. Arrancamos desde los conceptos básicos y vamos profundizando progresivamente. Las herramientas que mostramos son visuales e intuitivas.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAccordion('faq3')">
+                        ¿Qué voy a poder hacer después del workshop?
+                        <span id="icon-faq3" class="transform transition-transform duration-300"><svg
+                                class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg></span>
+                    </button>
+                    <div id="content-faq3" class="hidden faq-answer">
+                        Vas a tener un panorama completo del ecosistema de IA actual, vas a conocer las herramientas más potentes del mercado y vas a entender cómo aplicarlas en tu día a día profesional. Además, vas a ver en acción agentes de programación autónomos como Google Antigravity y Claude Code.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAccordion('faq4')">
+                        ¿Se van a grabar las sesiones?
+                        <span id="icon-faq4" class="transform transition-transform duration-300"><svg
+                                class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg></span>
+                    </button>
+                    <div id="content-faq4" class="hidden faq-answer">
+                        Sí, todo el workshop va a quedar grabado y documentado. Compartiremos las grabaciones y el material de soporte con todos los participantes después del evento.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+    <footer class="py-16 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <img src="hikelogo-violet.png" alt="Hike Ecosystem" style="height:28px;opacity:.7;filter:brightness(2)">
+                <div style="width:1px;height:20px;background:rgba(255,255,255,.2)"></div>
+                <!-- CIMA Logo white version -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="29" viewBox="0 0 171 41" fill="none" style="opacity:.7">
+                    <g clip-path="url(#clip0_footer)">
+                        <path d="M57.2227 24.0283V16.72C57.2227 7.1185 63.0788 0.769287 71.288 0.769287C77.8742 0.769287 83.3154 4.34306 83.8879 12.1336H79.5496C78.9194 6.8506 76.309 4.34842 71.3405 4.34842C65.3793 4.34842 61.7185 9.04201 61.7185 16.7254V23.9801C61.7185 31.717 65.0641 36.3034 71.3405 36.3034C76.1515 36.3034 79.6021 33.5816 80.1221 27.8217H84.203C83.473 36.2498 78.2943 39.9308 71.288 39.9308C62.5011 39.9308 57.2227 33.7959 57.2227 24.0336V24.0283Z" fill="white"/>
+                        <path d="M92.1436 0.769287H96.6026V39.9522H92.1436V0.769287Z" fill="white"/>
+                        <path d="M106.162 0.769287H112.176L121.682 29.9221L130.926 0.769287H137.05V39.9522H132.591V7.72931L122.118 39.9522H120.831L110.574 7.6275V39.8504L106.167 39.9522V0.769287H106.162Z" fill="white"/>
+                        <path d="M160.684 0.769287H154.403L143.925 39.9522H148.447L151.32 29.3488L152.292 25.7268L157.675 6.7863L162.833 25.7053L163.799 29.3166L166.541 39.9522H171L160.684 0.769287Z" fill="white"/>
+                        <path d="M34.3123 18.5149L27.5265 25.4374C27.5265 25.4374 27.5265 25.4374 27.5107 25.4535L27.579 25.5231L27.5212 25.5981L33.5402 31.7384L40.4048 24.7355L34.307 18.5149H34.3123Z" fill="#75A0AA"/>
+                        <path d="M27.5896 25.5178L21.5076 19.3132L7.0957 34.0102L13.1882 40.2308L27.5214 25.6089" fill="#9CC0CA"/>
+                        <path d="M27.2225 0.919312L20.4367 7.84182C20.4367 7.84182 20.4367 7.84182 20.4209 7.8579L20.4892 7.92755L20.4314 8.00256L26.4504 14.1428L33.315 7.13993L27.2225 0.919312Z" fill="#75A0AA"/>
+                        <path d="M20.494 7.92755L14.4119 1.71765L0 16.42L6.09776 22.6352L20.4257 8.01328" fill="#9CC0CA"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_footer">
+                            <rect width="171" height="39.4615" fill="white" transform="translate(0 0.769287)"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <p class="text-slate-400 text-sm font-light mb-2">Workshop CIMA × Hike Ecosystem · 10 de Junio 2026</p>
+            <p class="text-slate-500 text-xs font-light">Desarrollado por <a href="https://hikethecloud.com"
+                    target="_blank" class="text-sky-400 hover:underline"
+                    style="text-decoration:none">Hike Ecosystem</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            el.classList.add('will-animate');
+            observer.observe(el);
+        });
+
+        // Sidebar navigation
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navItems = document.querySelectorAll('#side-nav .snav-item[data-section]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 200;
+                if (pageYOffset >= top) current = section.getAttribute('id');
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.section === current) item.classList.add('active');
+            });
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const target = document.getElementById(item.dataset.section);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Lucide icons
+        if (window.lucide) lucide.createIcons();
+
+        // Accordion toggle helper
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+            if (icon) {
+                icon.classList.toggle('rotate-180');
+            }
+        }
+    </script>
+</body>
+
+</html>
